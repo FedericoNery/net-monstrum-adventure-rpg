@@ -1,0 +1,5 @@
+{
+  "paths": {
+    "@my-org/my-project/test": ["./utility/index.ts"]
+  }
+}
