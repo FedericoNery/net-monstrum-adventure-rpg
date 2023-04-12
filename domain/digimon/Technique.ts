@@ -1,3 +1,7 @@
+import { EntityBase } from "../EntityBase";
+import { DigimonInBattle } from "../battle/DigimonInBattle";
+import { ElementEnum } from "./ElementEnum";
+
 export class Technique extends EntityBase {
     name: string;
     description: number;
@@ -6,9 +10,10 @@ export class Technique extends EntityBase {
     magicPointsCost: number;
     accuracy: number;
     power: number;
-    elementType: ; //Elemento predominante 
+    typeElement: ElementEnum;
+    //elementType: ; //Elemento predominante 
     elementValue: number; // Valor elemento predominante
-    effect: Multi ATK ( 3x )  
+    //effect:   
     //EFECTO 
     // Heal -> cura un digimon aliado
     // Heal Allies -> cura todos los digimons
@@ -35,4 +40,13 @@ export class Technique extends EntityBase {
     // Counter Attack -> incrementa contrataque ??
 
     // Set field in types -> 
+
+    applyOn(target: DigimonInBattle){
+        //Chequear si la precision es superior??
+    }
+
+    heal(target: DigimonInBattle){ //Crear formula
+        let healPoints = target.digimon.healthPoints * 0.2 + (this.power * 0.01);
+        target.actualHealthPoints += healPoints;
+    }
 }    

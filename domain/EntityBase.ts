@@ -1,4 +1,4 @@
-export class EntityBase {
+export abstract class EntityBase {
     id: number;
 
     constructor(id: number){
