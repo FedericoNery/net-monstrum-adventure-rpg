@@ -4,6 +4,8 @@ import { Technique } from "./Technique";
 import { Equipment } from "../equipment/base/Equipment";
 import { ElementTolerances } from "./ElementTolerances";
 import { ITrainable } from "./ITrainable";
+import { StatusResistances } from "./StatusResistances";
+import { DigimonTypes } from "./DigimonTypes";
 export class Digimon extends EntityBase implements ITrainable {
   name: string;
   nickName: string; //Apodo del digimon??
@@ -54,18 +56,13 @@ won't do anything at all.
 HABRIA QUE AGREGAR CHARISMA ??? DONDE PODRIA INFLUIR
    */
   categoryEvolution: CategoryEvolution; // Novato Campeon Definitivo Mega etc
-  type: string; // Vacuna, Virus o Data
+  type: DigimonTypes; // Vacuna, Virus o Data
 
   healthPoints: number;
   magicPoints: number;
 
-  poisonResistance: number;
-  paralyzeResistance: number;
-  confuseResistance: number;
-  sleepResistance: number;
-  koResistance: number; // KO resistance ver de quitar
 
-
+  statusResistances: StatusResistances;
   equipment: Equipment;
   elementTolerances: ElementTolerances;
   //name: string;
@@ -81,77 +78,8 @@ HABRIA QUE AGREGAR CHARISMA ??? DONDE PODRIA INFLUIR
     this.name = name;
   }
 
-  physicalAttack(target: Digimon) {
-    let damage = this.baseAttack + this.strenght - target.defense
-    target.receiveAttack(damage > 0 ? damage * 1.3 : 0)
-  }
 
-  useTechnique(indexTechnique: number, target: Digimon){
-    let technique = this.techniques[indexTechnique]
-    technique.applyOn(target) 
-  }
-
-
-  magicalAttack(techniqueSelected: Technique, target: Digimon) {
-    /*
-      FORMULAS DE CALCULO DE DAÑO  
-      Damage=P*FS*FD
-
-      P:Power tech
-      FS:Factor spirit
-      FD:Factor elemental defense
-      SPI: Own spirit
-      SPIE: Enemy spirit
-      DEFE: Enemy elemental defense
-
-      FS=IF(SPI<3*SPIE;0,5*(1+SPI/SPIE);2)
-      FS value is between 0.5 and 2
-      FS takes its maximum value for SPI is triple or more the SPIE
-
-      FD=IF(DEFE<100;4-DEFE*0,03;IF(DEFE<300;1,25-DEFE*0,0025;0,65-DEFE*0,0005))
-      FD value is between 4 and 1 for SPIE <100
-      FD value is between 1 and 0.5 for SPIE <300
-    */
-    let powerTech = techniqueSelected.power;
-    let factorSpirit = this.spirit < 3 * target.spirit ? 0.5 * (1 + this.spirit / target.spirit) : 2;
-    let factorElementalDefense = 0;
-
-    let enemyElementalDefense = target.elementTolerances.getToleranceByElementNumber(techniqueSelected.typeElement);
-    if (enemyElementalDefense < 100) {
-      factorElementalDefense = 4 - enemyElementalDefense * 0.03
-    }
-
-    if (enemyElementalDefense < 300) {
-      factorElementalDefense = 1.25 - enemyElementalDefense * 0.0025;
-    }
-    else {
-      factorElementalDefense = 0.65 - enemyElementalDefense * 0.0005;
-    }
-
-    let damage = powerTech * factorSpirit * factorElementalDefense;
-    target.receiveAttack(damage);
-  }
-
-  receiveAttack(damage: number) {
-    this.healthPoints -= damage;
-  }
-
-  isCriticalAttack() {//VER COMO APLICAR ESTO
-
-  }
-
-  canApplyEffect(porcentageChance: number, effect: Effect) {
-
-  }
-
-  applyEffect(effect: Effect) {
-
-  }
-
-  cleanEffect(effect: Effect) {
-
-  }
-
+  
   addExperience(experience: number) {
 
   }
@@ -181,9 +109,4 @@ HABRIA QUE AGREGAR CHARISMA ??? DONDE PODRIA INFLUIR
   }
 
   
-
-
-
-
-
 }
