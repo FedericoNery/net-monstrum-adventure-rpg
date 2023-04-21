@@ -1,4 +1,6 @@
 import { Digimon } from "../digimon/Digimon";
+import { Effect } from "../digimon/Effect";
+import { Technique } from "../digimon/Technique";
 import { IAttack } from "./IAttack";
 import { StatusDigimon } from "./StatusDigimon";
 
@@ -10,6 +12,7 @@ export class DigimonInBattle implements IAttack {
 
   constructor(digimon: Digimon) {
     this.digimon = digimon;
+    //HACER UN FEATURE FLAG PARA ACTIVAR o DESACTIVAR QUE LOS DIGIMON RESTABLEZCAN O NO SUS STATS
     this.actualHealthPoints = digimon.healthPoints;
     this.actualMagicPoints = digimon.magicPoints;
     this.status = new StatusDigimon();
@@ -21,7 +24,7 @@ export class DigimonInBattle implements IAttack {
   }
     
       useTechnique(indexTechnique: number, target: DigimonInBattle) {
-    let technique = this.techniques[indexTechnique]
+    let technique = this.digimon.techniques[indexTechnique]
     technique.applyOn(target)
   }
     
@@ -47,10 +50,10 @@ export class DigimonInBattle implements IAttack {
       FD value is between 1 and 0.5 for SPIE <300
     */
     let powerTech = techniqueSelected.power;
-    let factorSpirit = this.spirit < 3 * target.spirit ? 0.5 * (1 + this.spirit / target.spirit) : 2;
+    let factorSpirit = this.digimon.spirit < 3 * target.digimon.spirit ? 0.5 * (1 + this.digimon.spirit / target.digimon.spirit) : 2;
     let factorElementalDefense = 0;
 
-    let enemyElementalDefense = target.elementTolerances.getToleranceByElementNumber(techniqueSelected.typeElement);
+    let enemyElementalDefense = target.digimon.elementTolerances.getToleranceByElementNumber(techniqueSelected.typeElement);
     if (enemyElementalDefense < 100) {
       factorElementalDefense = 4 - enemyElementalDefense * 0.03
     }
@@ -67,7 +70,7 @@ export class DigimonInBattle implements IAttack {
   }
     
       receiveAttack(damage: number) {
-    this.healthPoints -= damage;
+    this.digimon.healthPoints -= damage;
   }
 
   isCriticalAttack() {//VER COMO APLICAR ESTO POR AHORA ES UN PORCENTAJE FIJO

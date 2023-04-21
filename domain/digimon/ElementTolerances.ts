@@ -1,3 +1,10 @@
+  //name: string;
+  /*     STR - Deal more physical damage
+      DEF - Take less physical damage
+      SPR - Deal more magical damage (and affects hit % of magic attacks)
+      WIS - Take less magical damage
+      SPD - Affects hit % of physical attacks
+      FIRE/WATER/ICE/WIND/THUNDER/MACHINE/DARK - Take less damage from attacks of those elements. */
 export class ElementTolerances {
     /**
 Tolerances - Tolerances are the defense aginst elemental based attack. The
