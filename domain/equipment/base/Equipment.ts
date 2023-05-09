@@ -51,9 +51,11 @@ export class Equipment {
     getDefense() {
 
     }
+
     getSpirit() {
 
     }
+    
     getWisdom() {
 
     }

@@ -1,4 +1,4 @@
- class CategoryEvolution {
+export class CategoryEvolution {
     name: string;
     //Determinado por la categoria de evolución, es un dato a guardar???  60 Rookie 100 Champion 160 Definitive 240 Mega    130 - 160 - 200 - 240 - 320 - 400 
     baseAttack: number;
@@ -19,6 +19,5 @@ export class CategoriesEvolution {
     static MEGA: CategoryEvolution = new CategoryEvolution("Mega", 240);
 }
 
-export default CategoriesEvolution
 
 

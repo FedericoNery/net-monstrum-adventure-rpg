@@ -1,6 +1,6 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
-  "include": ["src/**/*.ts"],
+  "include": ["domain/**/*.ts", "mocks/**/*.ts", "mocks/**/*.mock.ts"],
   "exclude": ["node_modules/"],
   "extension": [".ts"],
   "reporter": ["text-summary", "html"],

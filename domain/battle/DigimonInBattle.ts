@@ -1,35 +1,39 @@
 import { Digimon } from "../digimon/Digimon";
-import { Effect } from "../digimon/Effect";
 import { Technique } from "../digimon/Technique";
 import { IAttack } from "./IAttack";
+import { InBattleStats } from "./InBattleStats";
 import { StatusDigimon } from "./StatusDigimon";
 
 export class DigimonInBattle implements IAttack {
   digimon: Digimon;
+  //quitar esto
   actualHealthPoints: number;
   actualMagicPoints: number;
+
+  inBattleStatsBase: InBattleStats;
+
   status: StatusDigimon;
 
   constructor(digimon: Digimon) {
     this.digimon = digimon;
     //HACER UN FEATURE FLAG PARA ACTIVAR o DESACTIVAR QUE LOS DIGIMON RESTABLEZCAN O NO SUS STATS
-    this.actualHealthPoints = digimon.healthPoints;
-    this.actualMagicPoints = digimon.magicPoints;
+    this.actualHealthPoints = digimon.stats.healthPoints;
+    this.actualMagicPoints = digimon.stats.magicPoints;
     this.status = new StatusDigimon();
   }
 
-    physicalAttack(target: DigimonInBattle) {
-    let damage = this.digimon.baseAttack + this.digimon.strenght - target.digimon.defense
+  physicalAttack(target: DigimonInBattle) {
+    let damage = this.digimon.categoryEvolution.baseAttack + this.digimon.stats.strenght - target.digimon.stats.defense
     target.receiveAttack(damage > 0 ? damage * 1.3 : 0)
   }
-    
-      useTechnique(indexTechnique: number, target: DigimonInBattle) {
+
+  useTechnique(indexTechnique: number, target: DigimonInBattle) {
     let technique = this.digimon.techniques[indexTechnique]
     technique.applyOn(target)
   }
-    
-    
-      magicalAttack(techniqueSelected: Technique, target: DigimonInBattle) {
+
+
+  magicalAttack(techniqueSelected: Technique, target: DigimonInBattle) {
     /*
       FORMULAS DE CALCULO DE DAÑO  
       Damage=P*FS*FD
@@ -68,8 +72,8 @@ export class DigimonInBattle implements IAttack {
     let damage = powerTech * factorSpirit * factorElementalDefense;
     target.receiveAttack(damage);
   }
-    
-      receiveAttack(damage: number) {
+
+  receiveAttack(damage: number) {
     this.digimon.healthPoints -= damage;
   }
 
@@ -78,20 +82,20 @@ export class DigimonInBattle implements IAttack {
     return numeroAleatorio > 6.25;
   }
 
-  applyCriticalDamage(damage: number){
+  applyCriticalDamage(damage: number) {
     return damage * 2; // Al menos por ahora que duplique el ataque, habría que ver que otra regla podriamos aplicar
     //Prodriamos aplicar una regla que sea que el daaño critico sea entre 1.25 como base y 1.75 como limite
   }
-    
-      canApplyEffect(porcentageChance: number, effect: Effect) {
+
+  canApplyEffect(porcentageChance: number, effect: Effect) {
 
   }
-    
-      applyEffect(effect: Effect) {
+
+  applyEffect(effect: Effect) {
 
   }
-    
-      cleanEffect(effect: Effect) {
+
+  cleanEffect(effect: Effect) {
 
   }
 

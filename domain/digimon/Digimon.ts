@@ -1,6 +1,6 @@
 import { EntityBase } from "../EntityBase";
 import { Equipment } from "../equipment/base/Equipment";
-import { CategoriesEvolution } from "./CategoryEvolution";
+import { CategoriesEvolution, CategoryEvolution } from "./CategoryEvolution";
 import { DigimonStatsBase } from "./DigimonStatsBase";
 import { DigimonTypes } from "./DigimonTypes";
 import { ElementTolerances } from "./ElementTolerances";
@@ -14,7 +14,7 @@ export class Digimon extends EntityBase implements ITrainable, IEvolutionable {
   levelNumber: number;
   experience: number;
 
-  categoryEvolution: CategoriesEvolution; // Novato Campeon Definitivo Mega etc
+  categoryEvolution: CategoryEvolution; // Novato Campeon Definitivo Mega etc
   type: DigimonTypes; // Vacuna, Virus o Data
   stats: DigimonStatsBase;
   statusResistances: StatusResistances;
@@ -28,7 +28,7 @@ export class Digimon extends EntityBase implements ITrainable, IEvolutionable {
     nickName: string,
     levelNumber: number,
     experience: number,
-    categoryEvolution: CategoriesEvolution,
+    categoryEvolution: CategoryEvolution,
     type: DigimonTypes,
     stats: DigimonStatsBase,
     statusResistance: StatusResistances,

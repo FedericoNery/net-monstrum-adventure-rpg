@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testdeck/mocha": "^0.3.3",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
@@ -9,5 +10,7 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   },
-  "test": "nyc ./node_modules/.bin/_mocha 'test/**/*.ts'"
+  "scripts": {
+    "test": "nyc ./node_modules/.bin/_mocha 'tests/**/*.test.ts'"
+  }
 }
