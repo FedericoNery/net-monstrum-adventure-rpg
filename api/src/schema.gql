@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateUserInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  login(userLoginInput: UserLoginInput!): User!
+}
+
+type Query {
+  sayHello: String!
+  users: [User!]!
+}
+
+type User {
+  password: String!
+  username: String!
+}
+
+input UserLoginInput {
+  password: String!
+  username: String!
+}

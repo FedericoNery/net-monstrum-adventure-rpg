@@ -1,4 +1,4 @@
-import { User } from 'src/domain/user.entity';
+/* import { User } from 'src/domain/user.entity';
 import { define } from 'typeorm-seeding';
 
 define(User, (faker) => {
@@ -11,4 +11,4 @@ define(User, (faker) => {
   user.lastName = lastName;
   user.password = faker.random.word();
   return user;
-});
+}); */
