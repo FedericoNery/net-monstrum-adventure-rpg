@@ -1,14 +1,14 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
+import { join } from 'path';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { ResolversModule } from './resolvers/resolvers.module';
-import { UsersService } from './service/users.service';
-import { ServicesModule } from './service/services.module';
+import { SeederModule } from './seeders/seeder.module';
+import { SeederService } from './seeders/seeder.service';
 
 @Module({
   imports: [
@@ -20,8 +20,9 @@ import { ServicesModule } from './service/services.module';
       sortSchema: true,
     }),
     ResolversModule,
+    SeederModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SeederService],
 })
 export class AppModule {}
