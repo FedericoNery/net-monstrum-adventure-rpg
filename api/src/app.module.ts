@@ -7,8 +7,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ResolversModule } from './resolvers/resolvers.module';
+import { SeederModule } from './seeders/seeder.module';
 import { SeederService } from './seeders/seeder.service';
-import { UsersSeederService } from './seeders/services/users.seeder.service';
 
 @Module({
   imports: [
@@ -20,8 +20,9 @@ import { UsersSeederService } from './seeders/services/users.seeder.service';
       sortSchema: true,
     }),
     ResolversModule,
+    SeederModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SeederService, UsersSeederService],
+  providers: [AppService, SeederService],
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { FooResolver } from './foo.resolver';
 import { UsersResolver } from './users.resolver';
 import { User, UserSchema } from '../models/User.model';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SeederModule } from '../seeders/services/seeder.module';
+import { SeederModule } from '../seeders/seeder.module';
 
 @Module({
   imports: [
