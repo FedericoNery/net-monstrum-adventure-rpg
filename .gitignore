@@ -1,3 +1,8 @@
 /node_modules
 /coverage
 .nyc_output
+
+/api/node_modules
+/api/dist
+.vscode
+.DS_Store
