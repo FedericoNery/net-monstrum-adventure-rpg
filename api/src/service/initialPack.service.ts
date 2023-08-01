@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { InitialPack, InitialPackDocument } from 'src/models/InitialPack.model';
+import { InitialPack, InitialPackDocument } from '../models/InitialPack.model';
 
 @Injectable()
 export class InitialPackService {
