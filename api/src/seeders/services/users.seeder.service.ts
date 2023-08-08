@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../../models/User.model';
+import { usersData } from '../data/users.data';
 
 @Injectable()
 export class UsersSeederService {
@@ -10,17 +11,20 @@ export class UsersSeederService {
   ) {}
 
   async seed() {
-    const dataToSeed = [
-      { username: 'User 1', password: '12345' },
-      { username: 'User 2', password: '12345' },
-    ];
-
     try {
-      // Utiliza el modelo para crear e insertar los datos en la base de datos.
-      await this.userModel.create(dataToSeed);
+      await this.userModel.create(usersData);
       console.log('UserSeeder: Data seeding completed.');
     } catch (error) {
       console.error('UserSeeder: Data seeding failed.', error);
+    }
+  }
+
+  async drop() {
+    try {
+      await this.userModel.deleteMany({});
+      console.log('UserSeeder: Data drop completed.');
+    } catch (error) {
+      console.error('UserSeeder: Data drop failed.', error);
     }
   }
 }

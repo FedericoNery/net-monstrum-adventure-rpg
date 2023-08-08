@@ -1,5 +1,5 @@
 import { Query, Resolver } from '@nestjs/graphql';
-import { InitialPack } from 'src/models/InitialPack.model';
+import { InitialPack } from 'src/schemas/initialPack.schemas';
 import { InitialPackService } from 'src/service/initialPack.service';
 
 @Resolver((of) => InitialPack)

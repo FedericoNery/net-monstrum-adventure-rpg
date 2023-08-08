@@ -5,14 +5,21 @@ import { UsersResolver } from './users.resolver';
 import { User, UserSchema } from '../models/User.model';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SeederModule } from '../seeders/seeder.module';
+import { Digimon, DigimonSchema } from '../models/Digimon.model';
+import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
+import { InitialPackResolver } from './initialPack.resolver';
 
 @Module({
   imports: [
     ServicesModule,
     SeederModule,
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Digimon.name, schema: DigimonSchema },
+      { name: InitialPack.name, schema: InitialPackSchema },
+    ]),
   ],
   controllers: [],
-  providers: [FooResolver, UsersResolver],
+  providers: [FooResolver, UsersResolver, InitialPackResolver],
 })
 export class ResolversModule {}
