@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SeederModule } from '../seeders/seeder.module';
 import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
+import { InitialPackResolver } from './initialPack.resolver';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
     ]),
   ],
   controllers: [],
-  providers: [FooResolver, UsersResolver],
+  providers: [FooResolver, UsersResolver, InitialPackResolver],
 })
 export class ResolversModule {}

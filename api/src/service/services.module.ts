@@ -5,6 +5,7 @@ import { User } from '../schemas/user.schemas';
 import { UsersService } from './users.service';
 import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
+import { InitialPackService } from './initialPack.service';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
       { name: InitialPack.name, schema: InitialPackSchema },
     ]),
   ],
-  providers: [UsersService],
-  exports: [UsersService],
+  providers: [UsersService, InitialPackService],
+  exports: [UsersService, InitialPackService],
 })
 export class ServicesModule {}

@@ -11,6 +11,7 @@ export class InitialPackService {
   ) {}
 
   async findAll(): Promise<InitialPack[]> {
-    return this.initialPackModel.find().exec();
+    //TIENE QUE IR EL NOMBRE DEL CAMPO AL POPULAR
+    return this.initialPackModel.find().populate('digimons').exec();
   }
 }
