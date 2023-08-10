@@ -9,13 +9,13 @@ export class User {
   password: string;
 }
 
-@InputType()
-export class UserLoginInput {
+@ObjectType()
+export class CreatedUserOutput {
   @Field({ nullable: false })
-  username: string;
+  id: string;
 
   @Field({ nullable: false })
-  password: string;
+  username: string;
 }
 
 @InputType()
@@ -26,3 +26,12 @@ export class CreateUserInput {
   @Field({ nullable: false })
   password: string;
 }
+
+/* @InputType()
+export class SelectInitialPackInput{
+  @Field({ nullable: false })
+  username: string;
+
+  @Field({ nullable: false })
+  packId: ObjectId;
+} */

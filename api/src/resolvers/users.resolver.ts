@@ -1,16 +1,15 @@
-import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateUserDto } from '../dto/CreateUser.dto';
-import { CreateUserInput, User, UserLoginInput } from '../schemas/user.schemas';
+import {
+  CreateUserInput,
+  CreatedUserOutput,
+  User,
+} from '../schemas/user.schemas';
 import { UsersService } from '../service/users.service';
 
 @Resolver((of) => User)
 export class UsersResolver {
   constructor(private usersService: UsersService) {}
-
-  @Mutation((returns) => User)
-  async login(@Args('userLoginInput') userLoginInput: UserLoginInput) {
-    return this.usersService.login(userLoginInput);
-  }
 
   @Query(() => [User])
   async users() {
@@ -18,13 +17,31 @@ export class UsersResolver {
     return users;
   }
 
-  @Mutation((returns) => User)
-  async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+  @Mutation((returns) => CreatedUserOutput)
+  async createUser(
+    @Args('createUserInput') createUserInput: CreateUserInput,
+  ): Promise<CreatedUserOutput> {
     const createUserDto: CreateUserDto = {
       username: createUserInput.username,
       password: createUserInput.password,
+      digimons: [],
     };
 
     return this.usersService.create(createUserDto);
+  }
+
+  //, @Args('selectInitialPackInput') selectInitialPackInput: SelectInitialPackInput
+  @Mutation(() => String)
+  async selectInitialPack(@Context() context) {
+    const { req } = context;
+    if (req.session) {
+      if (!req.session.visits) {
+        req.session.visits = 1;
+      } else {
+        req.session.visits += 1;
+      }
+      return `Number of visits: ${req.session.visits}`;
+    }
+    return 'Session not available';
   }
 }

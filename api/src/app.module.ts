@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { ResolversModule } from './resolvers/resolvers.module';
 import { SeederModule } from './seeders/seeder.module';
 import { SeederService } from './seeders/seeder.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,11 +17,12 @@ import { SeederService } from './seeders/seeder.service';
     MongooseModule.forRoot('mongodb://localhost:27017/digimon-db'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), './src/schema.gql'),
       sortSchema: true,
     }),
     ResolversModule,
     SeederModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, SeederService],
