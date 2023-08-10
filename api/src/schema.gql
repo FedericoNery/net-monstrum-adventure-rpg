@@ -7,6 +7,11 @@ input CreateUserInput {
   username: String!
 }
 
+type CreatedUserOutput {
+  id: String!
+  username: String!
+}
+
 type Digimon {
   defense: Float!
   healthPoints: Float!
@@ -26,8 +31,9 @@ type InitialPack {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  login(userLoginInput: UserLoginInput!): User!
+  createUser(createUserInput: CreateUserInput!): CreatedUserOutput!
+  selectInitialPack: String!
+  signIn(signInInput: SignInInput!): SignInOutput!
 }
 
 type Query {
@@ -36,12 +42,16 @@ type Query {
   users: [User!]!
 }
 
-type User {
+input SignInInput {
   password: String!
   username: String!
 }
 
-input UserLoginInput {
+type SignInOutput {
+  access_token: String!
+}
+
+type User {
   password: String!
   username: String!
 }

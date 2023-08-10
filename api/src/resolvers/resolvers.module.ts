@@ -8,6 +8,7 @@ import { SeederModule } from '../seeders/seeder.module';
 import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
 import { InitialPackResolver } from './initialPack.resolver';
+import { AuthResolver } from './auth.resolver';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { InitialPackResolver } from './initialPack.resolver';
     ]),
   ],
   controllers: [],
-  providers: [FooResolver, UsersResolver, InitialPackResolver],
+  providers: [FooResolver, UsersResolver, InitialPackResolver, AuthResolver],
 })
 export class ResolversModule {}

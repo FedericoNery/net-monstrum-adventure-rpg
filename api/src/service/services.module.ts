@@ -6,6 +6,8 @@ import { UsersService } from './users.service';
 import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
 import { InitialPackService } from './initialPack.service';
+import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/auth/auth.service';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { InitialPackService } from './initialPack.service';
       { name: InitialPack.name, schema: InitialPackSchema },
     ]),
   ],
-  providers: [UsersService, InitialPackService],
-  exports: [UsersService, InitialPackService],
+  providers: [UsersService, InitialPackService, JwtService, AuthService],
+  exports: [UsersService, InitialPackService, JwtService, AuthService],
 })
 export class ServicesModule {}
