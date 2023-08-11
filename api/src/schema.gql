@@ -32,7 +32,7 @@ type InitialPack {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): CreatedUserOutput!
-  selectInitialPack: String!
+  selectInitialPack(selectInitialPackInput: SelectInitialPackInput!): String!
   signIn(signInInput: SignInInput!): SignInOutput!
 }
 
@@ -40,6 +40,10 @@ type Query {
   initialPacks: [InitialPack!]!
   sayHello: String!
   users: [User!]!
+}
+
+input SelectInitialPackInput {
+  packId: String!
 }
 
 input SignInInput {

@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { ObjectId } from 'mongoose';
 
 @ObjectType()
 export class User {
@@ -27,11 +28,9 @@ export class CreateUserInput {
   password: string;
 }
 
-/* @InputType()
-export class SelectInitialPackInput{
+//TODO : VER SI EL TIPO DE DATO ES EL CORRECTO
+@InputType()
+export class SelectInitialPackInput {
   @Field({ nullable: false })
-  username: string;
-
-  @Field({ nullable: false })
-  packId: ObjectId;
-} */
+  packId: string;
+}

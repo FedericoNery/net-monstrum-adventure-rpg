@@ -3,9 +3,12 @@ import { CreateUserDto } from '../dto/CreateUser.dto';
 import {
   CreateUserInput,
   CreatedUserOutput,
+  SelectInitialPackInput,
   User,
 } from '../schemas/user.schemas';
 import { UsersService } from '../service/users.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -30,11 +33,23 @@ export class UsersResolver {
     return this.usersService.create(createUserDto);
   }
 
-  //, @Args('selectInitialPackInput') selectInitialPackInput: SelectInitialPackInput
+  @UseGuards(AuthGuard)
   @Mutation(() => String)
-  async selectInitialPack(@Context() context) {
+  async selectInitialPack(
+    @Context() context,
+    @Args('selectInitialPackInput')
+    selectInitialPackInput: SelectInitialPackInput,
+  ) {
     const { req } = context;
+
+    if (req.user) {
+      const { sub } = req.user;
+    }
+    return 'Session not available';
+/*
+    console.log(req);
     if (req.session) {
+      console.log(req.session);
       if (!req.session.visits) {
         req.session.visits = 1;
       } else {
@@ -42,6 +57,6 @@ export class UsersResolver {
       }
       return `Number of visits: ${req.session.visits}`;
     }
-    return 'Session not available';
+    return 'Session not available'; */
   }
 }
