@@ -7,12 +7,16 @@ import {
   User,
 } from '../schemas/user.schemas';
 import { UsersService } from '../service/users.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { UseGuards } from '@nestjs/common';
+import { SelectInitialPackCommandHandler } from '../commandHandlers/SelectInitialPackCommandHandler';
 
 @Resolver((of) => User)
 export class UsersResolver {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private selectInitialCommandHandler: SelectInitialPackCommandHandler,
+  ) {}
 
   @Query(() => [User])
   async users() {
@@ -44,9 +48,14 @@ export class UsersResolver {
 
     if (req.user) {
       const { sub } = req.user;
+      this.selectInitialCommandHandler.execute({
+        packId: selectInitialPackInput.packId,
+        userId: sub,
+      });
+      return 'User asigned pack';
     }
     return 'Session not available';
-/*
+    /*
     console.log(req);
     if (req.session) {
       console.log(req.session);

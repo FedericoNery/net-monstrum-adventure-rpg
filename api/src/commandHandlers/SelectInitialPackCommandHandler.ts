@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InitialPackService } from 'src/service/initialPack.service';
-import { UsersService } from 'src/service/users.service';
+import { InitialPackService } from '../service/initialPack.service';
+import { UsersService } from '../service/users.service';
 import { User } from '../models/User.model';
 
 interface SelectInitialPackCommandHandlerInputDto {
@@ -18,9 +18,16 @@ export class SelectInitialPackCommandHandler {
   async execute(
     payload: SelectInitialPackCommandHandlerInputDto,
   ): Promise<User> {
-    const pack = this.initialPackService.findById({ _id: payload.packId });
-    const user = this.usersService.findById({ _id: payload.userId });
-    user.
-    return;
+    const pack = await this.initialPackService.findById(payload.packId);
+    const user = await this.usersService.findById(payload.userId);
+
+    const listOfDigimonInBattle = [];
+    pack.digimons.forEach((digimon) => {
+      listOfDigimonInBattle.push(digimon.toDigimonInBattle());
+    });
+
+    user.teamDigimon = listOfDigimonInBattle;
+    const userUpdated = this.usersService.updateOne(user);
+    return userUpdated;
   }
 }

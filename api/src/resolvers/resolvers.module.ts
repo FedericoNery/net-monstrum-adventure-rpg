@@ -9,9 +9,11 @@ import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
 import { InitialPackResolver } from './initialPack.resolver';
 import { AuthResolver } from './auth.resolver';
+import { CommandHandlersModule } from '../commandHandlers/commandHandlers.module';
 
 @Module({
   imports: [
+    CommandHandlersModule,
     ServicesModule,
     SeederModule,
     MongooseModule.forFeature([

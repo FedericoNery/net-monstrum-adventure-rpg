@@ -10,6 +10,8 @@ import { ResolversModule } from './resolvers/resolvers.module';
 import { SeederModule } from './seeders/seeder.module';
 import { SeederService } from './seeders/seeder.service';
 import { AuthModule } from './auth/auth.module';
+import { CommandHandlersModule } from './commandHandlers/commandHandlers.module';
+import { ServicesModule } from './service/services.module';
 
 @Module({
   imports: [
