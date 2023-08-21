@@ -9,15 +9,22 @@ import { Digimon, DigimonSchema } from '../models/Digimon.model';
 import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
 import { InitialPackResolver } from './initialPack.resolver';
 import { AuthResolver } from './auth.resolver';
+import { CommandHandlersModule } from '../commandHandlers/commandHandlers.module';
+import {
+  DigimonBattle,
+  DigimonBattleSchema,
+} from '../models/DigimonBattle.model';
 
 @Module({
   imports: [
+    CommandHandlersModule,
     ServicesModule,
     SeederModule,
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Digimon.name, schema: DigimonSchema },
       { name: InitialPack.name, schema: InitialPackSchema },
+      { name: DigimonBattle.name, schema: DigimonBattleSchema },
     ]),
   ],
   controllers: [],

@@ -12,7 +12,13 @@ export class User extends Document {
   @Prop()
   password: string;
 
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Digimon' }] })
+  /*
+  TODO Ver si conviene guardar el objeto dentro del user o directamente guardarlo en otro documento
+  @Prop({
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'DigimonBattle' }],
+  })
+  teamDigimon: DigimonBattle[]; */
+  @Prop()
   teamDigimon: DigimonBattle[];
 }
 

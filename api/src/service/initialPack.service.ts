@@ -14,4 +14,8 @@ export class InitialPackService {
     //TIENE QUE IR EL NOMBRE DEL CAMPO AL POPULAR
     return this.initialPackModel.find().populate('digimons').exec();
   }
+
+  async findById(id: string): Promise<InitialPack> {
+    return this.initialPackModel.findById(id).populate('digimons').exec();
+  }
 }

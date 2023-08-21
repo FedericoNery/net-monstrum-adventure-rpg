@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from '../dto/CreateUser.dto';
 import { User, UserDocument } from '../models/User.model';
-import { encrypt } from 'src/utils/encryptation';
+import { encrypt } from '../utils/encryptation';
 
 interface CreatedUserOutputDto {
   id: string;
@@ -28,5 +28,18 @@ export class UsersService {
 
   async findByUsername(username: string): Promise<User> {
     return this.userModel.findOne({ username }).exec();
+  }
+
+  async findById(id: string): Promise<User> {
+    return this.userModel.findById(id).exec();
+  }
+
+  async updateOne(user: Partial<User>): Promise<User> {
+    const userUpdated = this.userModel.findOneAndUpdate(
+      { _id: user._id },
+      { $set: user },
+    );
+    console.log(userUpdated)
+    return userUpdated;
   }
 }

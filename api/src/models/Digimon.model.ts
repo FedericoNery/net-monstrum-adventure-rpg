@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { DigimonBattle } from './DigimonBattle.model';
 
 export type DigimonDocument = HydratedDocument<Digimon>;
 
@@ -31,6 +32,26 @@ export class Digimon {
 
   @Prop()
   magicPoints: number;
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  toDigimonInBattle: Function;
 }
 
 export const DigimonSchema = SchemaFactory.createForClass(Digimon);
+
+DigimonSchema.methods.toDigimonInBattle = function (): DigimonBattle {
+  const digimonBattle = new DigimonBattle();
+  digimonBattle.defense = this.defense;
+  digimonBattle.healthPoints = this.healthPoints;
+  digimonBattle.magicPoints = this.magicPoints;
+  digimonBattle.name = this.name;
+  digimonBattle.nickName = this.nickName;
+  digimonBattle.speed = this.speed;
+  digimonBattle.spirit = this.spirit;
+  digimonBattle.strenght = this.strenght;
+  digimonBattle.wisdom = this.wisdom;
+
+  return digimonBattle;
+};
+
+DigimonSchema.loadClass(Digimon);
