@@ -37,11 +37,9 @@ export class UsersService {
   async updateOne(user: Partial<User>): Promise<User> {
     const userUpdated = this.userModel.findOneAndUpdate(
       { _id: user._id },
-      user,
-      {
-        new: true,
-      },
+      { $set: user },
     );
+    console.log(userUpdated)
     return userUpdated;
   }
 }

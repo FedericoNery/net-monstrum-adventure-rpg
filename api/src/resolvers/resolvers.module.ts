@@ -10,6 +10,10 @@ import { InitialPack, InitialPackSchema } from '../models/InitialPack.model';
 import { InitialPackResolver } from './initialPack.resolver';
 import { AuthResolver } from './auth.resolver';
 import { CommandHandlersModule } from '../commandHandlers/commandHandlers.module';
+import {
+  DigimonBattle,
+  DigimonBattleSchema,
+} from '../models/DigimonBattle.model';
 
 @Module({
   imports: [
@@ -20,6 +24,7 @@ import { CommandHandlersModule } from '../commandHandlers/commandHandlers.module
       { name: User.name, schema: UserSchema },
       { name: Digimon.name, schema: DigimonSchema },
       { name: InitialPack.name, schema: InitialPackSchema },
+      { name: DigimonBattle.name, schema: DigimonBattleSchema },
     ]),
   ],
   controllers: [],

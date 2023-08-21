@@ -16,6 +16,6 @@ export class InitialPackService {
   }
 
   async findById(id: string): Promise<InitialPack> {
-    return this.initialPackModel.findById(id).exec();
+    return this.initialPackModel.findById(id).populate('digimons').exec();
   }
 }
